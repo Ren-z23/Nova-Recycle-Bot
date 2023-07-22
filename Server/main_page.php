@@ -19,7 +19,6 @@
             padding: 10px;
             box-sizing: border-box;
             display: flex;
-            justify-content: space-between; /* Add this to space the images apart */
             align-items: center;
         }
 
@@ -28,6 +27,10 @@
             cursor: pointer;
             border-radius: 50%; /* Make the profile image circular */
             overflow: hidden; /* Hide any overflow caused by border-radius */
+        }
+
+        #navigation-panel-redeem {
+            right: 0px;
         }
 
         #token-iframe {
@@ -39,9 +42,20 @@
             border: none;
         }
 
-        /* Add this to create some space between the images */
-        #navigation-panel img + img {
-            margin-left: 10px;
+        #redeem-button {
+            margin-left: auto; /* Push the redeem button to the right */
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Add some spacing between the images and the redeem button */
+        #navigation-panel img,
+        #redeem-button {
+            margin-right: 10px;
         }
     </style>
     <script>
@@ -51,6 +65,14 @@
 
             // Set the source URL of the iframe to profile.php
             iframe.src = 'profile.php';
+        }
+
+        function loadTokenPage() {
+            // Get the iframe element
+            var iframe = document.getElementById('token-iframe');
+
+            // Set the source URL of the iframe to token.php
+            iframe.src = 'token.php';
         }
 
         function loadRedeemPage() {
@@ -67,8 +89,11 @@
         <!-- Replace "Profile2.png" with the path to your profile image -->
         <img src="Profile2.png" alt="Profile Image" onclick="loadProfilePage()">
 
-        <!-- Replace "Redeem.png" with the path to your redeem image -->
-        <img src="Redeem.jpg" alt="Redeem Image" onclick="loadRedeemPage()">
+        <!-- Replace "Token.png" with the path to your token/QR code image -->
+        <img src="Token.png" alt="Token/QR Code Image" onclick="loadTokenPage()">
+
+        <!-- Add the redeem button -->
+        <img id = 'navigation-panel-redeem' src="Redeem.jpg" alt="Redeem Image" onclick="loadRedeemPage()">
     </div>
 
     <!-- Iframe displaying token.php -->
