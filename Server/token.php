@@ -94,8 +94,42 @@ if (isset($_POST['token']) && !empty($_POST['token'])) {
         #enter-token-form p.error-msg {
             color: red;
         }
+
+        /* CSS for the greenhouse-gas-info section */
+        #greenhouse-gas-info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%; /* Adjust the width to your preference */
+            max-height: 70%; /* Adjust the max height to make it scrollable */
+            background: rgba(0, 0, 0, 0.8); /* Almost black and transparent */
+            padding: 10px;
+            color: white;
+            font-size: 150%;
+            overflow-y: auto;
+            display: none; /* Initially hide the section */
+            z-index: 1; /* Bring it to the front */
+        }
+
+        #greenhouse-gas-info h3 {
+            text-align: center;
+            font-size: 170%;
+        }
+        #greenhouse-gas-info p {
+            font-size: 110%;
+            text-align: center;
+        }
+
+        #greenhouse-gas-info img {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 300px;
+        }
     </style>
 </head>
+
 <body>
     <video id="background-video" autoplay muted loop>
         <source src="stock_video.mp4" type="video/mp4">
@@ -109,7 +143,8 @@ if (isset($_POST['token']) && !empty($_POST['token'])) {
         <h2 style="text-align: center;">Welcome, <?php echo $_SESSION['username']; ?>!</h2>
         <p style="text-align: center;">Please enter your token:</p>
         <form method="post" action="token.php" style="text-align: center;">
-            <input type="text" name="token" required value="<?php echo isset($_SESSION['token']) ? $_SESSION['token'] : ''; ?>">
+            <input type="text" name="token" required
+                value="<?php echo isset($_SESSION['token']) ? $_SESSION['token'] : ''; ?>">
             <br>
             <input type="submit" value="Submit">
         </form>
@@ -122,6 +157,24 @@ if (isset($_POST['token']) && !empty($_POST['token'])) {
             <p style="text-align: center;">Token processed: <?php echo $processed_token; ?></p>
             <p style="text-align: center;">You are rewarded 30 points!</p>
         <?php endif; ?>
+
     </div>
+
+    <!-- New section for greenhouse gas information -->
+    <?php if (isset($processed_token)): ?>
+        <div id="greenhouse-gas-info">
+            <h3>Greenhouse Gas Emissions Information</h3>
+            <img src="pic.png" alt="Greenhouse Gas">
+            <p>Did you know plastic was recently found in a living human's blood?</p>
+            <p>Congratulations! By recycling, you just lowered the chances of that!</p>
+        </div>
+    <?php endif; ?>
+    <script>
+        // JavaScript to handle visibility toggle
+        var processedToken = "<?php echo isset($processed_token) ? 'true' : 'false'; ?>";
+        if (processedToken === 'true') {
+            document.getElementById("greenhouse-gas-info").style.display = "block";
+        }
+    </script>
 </body>
 </html>
