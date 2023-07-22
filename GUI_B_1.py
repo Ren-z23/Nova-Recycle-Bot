@@ -121,7 +121,7 @@ class ImageBackground(FloatLayout):
         self.Accept_button.bind(on_release=self.accept_button_clicked)
         
         self.QR_code = Image(
-            source=os.path.join(IMAGE_DIRECTORY, 'QRCode.png'),
+            source=os.path.join(IMAGE_DIRECTORY, 'qr-code.png'),
             allow_stretch=True,
             size=(750,750),
             pos_hint={"center_x": 0.5, "center_y": 0.5},

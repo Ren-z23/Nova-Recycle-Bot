@@ -8,6 +8,12 @@ $login_mode = 'manual'; // Change to 'manual' for manual login
 $valid_username = 'Ren_z23';
 $valid_password = 'password';
 
+// Check if a token is provided in the URL
+if (isset($_GET['token']) && !empty($_GET['token'])) {
+    // Save the token in a session for later use
+    $_SESSION['token'] = $_GET['token'];
+}
+
 // Handle login form submission
 if ($login_mode === 'manual' && isset($_POST['username']) && isset($_POST['password'])) {
     // Get the submitted username and password
@@ -16,25 +22,16 @@ if ($login_mode === 'manual' && isset($_POST['username']) && isset($_POST['passw
 
     // Perform manual login validation by comparing submitted credentials with valid credentials
     if ($submitted_username === $valid_username && $submitted_password === $valid_password) {
-        // Successful login, store the username in the session and redirect to enter_token.php
+        // Successful login, store the username in the session
         $_SESSION['username'] = $valid_username;
-        header('Location: main_page.php?login_mode=' . urlencode($login_mode));
-        exit;
     } else {
-        // Invalid credentials, redirect back to the login page with an error message
+        // Invalid credentials, set the error flag to display an error message on the login form
         $error = true;
     }
 }
 
-// Check if a token is provided in the URL
-if (isset($_GET['token']) && !empty($_GET['token'])) {
-    // Save the token in a session for later use
-    $_SESSION['token'] = $_GET['token'];
-
-    // Redirect to the enter_token.php page with the token as a query parameter
-    header('Location: main_page.php?token=' . urlencode($_GET['token']));
-    exit;
-}
+// Check if the user is logged in
+$is_logged_in = isset($_SESSION['username']);
 ?>
 
 <!DOCTYPE html>
@@ -101,26 +98,35 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
         Your browser does not support the video tag.
     </video>
 
-    <div id="login-form">
-        <h2>Login</h2>
-        <?php if (isset($error) && $error): ?>
-            <p class="error-msg">Invalid credentials. Please try again.</p>
-        <?php endif; ?>
-        <form method="post" action="index.php">
-            <?php if ($login_mode === 'manual'): ?>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+    <?php if (!$is_logged_in): ?>
+        <!-- Show the login form if the user is not logged in -->
+        <div id="login-form">
+            <h2>Login</h2>
+            <?php if (isset($error) && $error): ?>
+                <p class="error-msg">Invalid credentials. Please try again.</p>
             <?php endif; ?>
+            <form method="post" action="index.php">
+                <?php if ($login_mode === 'manual'): ?>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
 
-            <?php if ($login_mode === 'auto'): ?>
-                <!-- No input fields for auto-login mode -->
-            <?php endif; ?>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                <?php endif; ?>
 
-            <input type="submit" value="Login">
-        </form>
-    </div>
+                <?php if ($login_mode === 'auto'): ?>
+                    <!-- No input fields for auto-login mode -->
+                <?php endif; ?>
+
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    <?php else: ?>
+        <!-- Redirect to main_page.php if the user is logged in -->
+        <?php
+        header('Location: main_page.php');
+        exit;
+        ?>
+    <?php endif; ?>
 </body>
 </html>

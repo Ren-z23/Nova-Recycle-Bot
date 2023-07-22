@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Main Page</title>
     <style>
@@ -25,8 +26,10 @@
         #navigation-panel img {
             height: 40px;
             cursor: pointer;
-            border-radius: 50%; /* Make the profile image circular */
-            overflow: hidden; /* Hide any overflow caused by border-radius */
+            border-radius: 50%;
+            /* Make the profile image circular */
+            overflow: hidden;
+            /* Hide any overflow caused by border-radius */
         }
 
         #navigation-panel-redeem {
@@ -35,7 +38,8 @@
 
         #token-iframe {
             position: absolute;
-            top: 60px; /* height of the navigation panel */
+            top: 60px;
+            /* height of the navigation panel */
             left: 0;
             width: 100%;
             height: calc(100% - 60px);
@@ -43,7 +47,8 @@
         }
 
         #redeem-button {
-            margin-left: auto; /* Push the redeem button to the right */
+            margin-left: auto;
+            /* Push the redeem button to the right */
             padding: 5px 10px;
             background-color: #4CAF50;
             color: white;
@@ -82,8 +87,14 @@
             // Set the source URL of the iframe to redeem.php
             iframe.src = 'redeem.php';
         }
+
+        // Function to check if the user is logged in
+        function isLoggedIn() {
+            return '<?php echo isset($_SESSION["username"]) ? "true" : "false"; ?>';
+        }
     </script>
 </head>
+
 <body>
     <div id="navigation-panel">
         <!-- Replace "Profile2.png" with the path to your profile image -->
@@ -93,10 +104,11 @@
         <img src="Token.png" alt="Token/QR Code Image" onclick="loadTokenPage()">
 
         <!-- Add the redeem button -->
-        <img id = 'navigation-panel-redeem' src="Redeem.jpg" alt="Redeem Image" onclick="loadRedeemPage()">
+        <img id='navigation-panel-redeem' src="Redeem.jpg" alt="Redeem Image" onclick="loadRedeemPage()">
     </div>
 
     <!-- Iframe displaying token.php -->
     <iframe id="token-iframe" src="token.php"></iframe>
 </body>
+
 </html>
