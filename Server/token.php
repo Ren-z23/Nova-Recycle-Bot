@@ -108,7 +108,7 @@ if (isset($_POST['token']) && !empty($_POST['token'])) {
     <div id="enter-token-form">
         <h2 style="text-align: center;">Welcome, <?php echo $_SESSION['username']; ?>!</h2>
         <p style="text-align: center;">Please enter your token:</p>
-        <form method="post" action="enter_token.php" style="text-align: center;">
+        <form method="post" action="token.php" style="text-align: center;">
             <input type="text" name="token" required value="<?php echo isset($_SESSION['token']) ? $_SESSION['token'] : ''; ?>">
             <br>
             <input type="submit" value="Submit">

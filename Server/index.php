@@ -5,7 +5,7 @@ session_start();
 $login_mode = 'manual'; // Change to 'manual' for manual login
 
 // Set the username and password for manual login mode (change these values as needed)
-$valid_username = 'username';
+$valid_username = 'Ren_z23';
 $valid_password = 'password';
 
 // Handle login form submission
@@ -18,7 +18,7 @@ if ($login_mode === 'manual' && isset($_POST['username']) && isset($_POST['passw
     if ($submitted_username === $valid_username && $submitted_password === $valid_password) {
         // Successful login, store the username in the session and redirect to enter_token.php
         $_SESSION['username'] = $valid_username;
-        header('Location: enter_token.php?login_mode=' . urlencode($login_mode));
+        header('Location: main_page.php?login_mode=' . urlencode($login_mode));
         exit;
     } else {
         // Invalid credentials, redirect back to the login page with an error message
@@ -32,7 +32,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     $_SESSION['token'] = $_GET['token'];
 
     // Redirect to the enter_token.php page with the token as a query parameter
-    header('Location: enter_token.php?token=' . urlencode($_GET['token']));
+    header('Location: main_page.php?token=' . urlencode($_GET['token']));
     exit;
 }
 ?>
