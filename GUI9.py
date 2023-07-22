@@ -24,7 +24,7 @@ from functools import partial
 
 my_ip = "192.168.0.100"
 camera_mode = True
-camera_index = 0
+camera_index = 1
 custom_image = ""  # ImagePath
 
 
@@ -113,7 +113,12 @@ class ImageBackground(FloatLayout):
         self.no_button.bind(on_release=self.no_button_clicked)
         self.add_widget(self.no_button)
         
-        
+        self.close_button = Button(
+            text="Close",
+            size_hint=(None, None),
+            size=(100, 50),
+            pos_hint={"x": 0, "top": 1},
+        )
 
         self.Accept_button = Button(
             text="Acccepted",
@@ -328,12 +333,7 @@ class ImageBackground(FloatLayout):
         button_width = Window.width / 2
         button_height = Window.height
 
-        self.close_button = Button(
-            text="Close",
-            size_hint=(None, None),
-            size=(100, 50),
-            pos_hint={"x": 0, "top": 1},
-        )
+        
         self.close_button.bind(on_release=self.close_button_callback)
         self.add_widget(self.close_button)
 
@@ -375,6 +375,12 @@ class ImageBackground(FloatLayout):
             self.remove_widget(self.additional_image_widget)
             self.additional_image_widget = None
 
+    def on_yes_button_clicked(self, instance):
+        self.yes_button_clicked(instance)
+    
+    def on_close_button_clicked(self, instance):
+        self.close_button_callback(instance)
+
     def listen_socket(self):
         global command
         # Create a socket server
@@ -398,9 +404,13 @@ class ImageBackground(FloatLayout):
 
             # Close the client socket
             client_socket.close()
-            if command == "Command: Yes Button":
-                # ImageBackground.finished_detection_image()
-                self.yes_button_clicked()
+            print(f'GUI: {command}')
+            if command == "Command: Yes_Button":
+                Clock.schedule_once(lambda dt: self.on_yes_button_clicked(self.yes_button), 0)
+            elif command == "Command: Close_Button":
+                print('clickedd')
+                Clock.schedule_once(lambda dt: self.on_close_button_clicked(self.close_button), 0)
+                
 
     def start_control_panel(self):
         control_panel.app.run(host="0.0.0.0", port=5001)

@@ -38,7 +38,15 @@ def press_yes_button():
 
 @app.route('/test_function_python', methods=['POST'])
 def test_function_python():
-    print('it worked')
+    print('Command: Close_Button')
+    # Create a socket client
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Connect to the server
+    server_address = (my_ip, 1234)
+    client_socket.connect(server_address)
+    client_socket.sendall(b'Command: Close_Button')
+    client_socket.close()
     return jsonify({'result': 'test_function_python'})
 
 if __name__ == '__main__':
