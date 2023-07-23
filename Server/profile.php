@@ -26,7 +26,6 @@ if (isset($_POST['logout'])) {
 }
 ?>
 
-<!-- Rest of the profile.php code remains the same -->
 
 
 <!DOCTYPE html>

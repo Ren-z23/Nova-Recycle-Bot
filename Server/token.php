@@ -19,7 +19,9 @@ if (isset($_GET['login_mode'])) {
 $valid_tokens = array(
     'token1',
     'token2',
-    'token3'
+    'token3',
+    'token4',
+    'token5'
 );
 
 // Initialize the error message

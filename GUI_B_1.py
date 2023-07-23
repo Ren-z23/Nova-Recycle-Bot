@@ -23,6 +23,7 @@ from kivy.graphics.texture import Texture
 from functools import partial
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
+import qrcode
 
 
 hostname = socket.gethostname()
@@ -34,6 +35,8 @@ shown_text = "Hello World!"
 
 IMAGE_DIRECTORY = "Assets\GUI\Images"
 
+Tokens = ['token1', 'token2', 'token3', 'token4', 'token5']
+Used_Tokens = []
 
 class ImageBackground(FloatLayout):
     def __init__(self, **kwargs):
@@ -120,12 +123,7 @@ class ImageBackground(FloatLayout):
         )
         self.Accept_button.bind(on_release=self.accept_button_clicked)
         
-        self.QR_code = Image(
-            source=os.path.join(IMAGE_DIRECTORY, 'qr-code.png'),
-            allow_stretch=True,
-            size=(750,750),
-            pos_hint={"center_x": 0.5, "center_y": 0.5},
-        )
+        
 
         self.image_widget = None
         self.predicter = ai.AI()
@@ -133,11 +131,26 @@ class ImageBackground(FloatLayout):
     def accept_button_clicked(self, instance):
         print("Accept Button Clicked")
 
-        # Remove the additional image widget if it exists
-        if self.additional_image_widget:
-            self.remove_widget(self.additional_image_widget)
-            self.additional_image_widget = None
+        # ... (other code)
 
+        # Remove the QR code image widget if it exists
+        if hasattr(self, "QR_code") and self.QR_code:
+            self.remove_widget(self.QR_code)
+
+        current_generated_token = Tokens[0]
+        Used_Tokens.append(current_generated_token)
+        Tokens.remove(current_generated_token)
+
+        self.create_qr_code(current_generated_token)
+
+        # Create a new QR code image widget with the updated QR code image
+        self.QR_code = Image(
+            source=os.path.join(IMAGE_DIRECTORY, "Token_QR_Code.png"),
+            allow_stretch=True,
+            size=(750, 750),
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+        )
+        self.QR_code.reload()
         # Remove the predicted label from its current parent
         if self.predicted_label.parent:
             self.predicted_label.parent.remove_widget(self.predicted_label)
@@ -146,14 +159,14 @@ class ImageBackground(FloatLayout):
         if self.Accept_button in self.children:
             self.remove_widget(self.Accept_button)
 
-        # Add the QR code image when "Accepted" button is clicked
+        # Add the new QR code image widget when "Accepted" button is clicked
         self.add_widget(self.QR_code)
-        #self.QR_code.center = (380, 390)
-
+        
         self.accept_lock = True
 
         # Schedule the function to check the predicted label
         Clock.schedule_once(self.check_predicted_label, 0.5)
+
             
         
 
@@ -162,7 +175,7 @@ class ImageBackground(FloatLayout):
         predicted_label = self.predicted_label.text
 
         # Check if the predicted label matches the condition (e.g., "Coke")
-        if predicted_label == "Sprite":
+        if predicted_label == "GreenTea":
             # Add the Accept_button to the layout if not already added
             if self.Accept_button not in self.children:
                 if self.accept_lock == False:
@@ -387,6 +400,22 @@ class ImageBackground(FloatLayout):
             # Close the client socket
             client_socket2.close()
             print(f'Class: {self.predicted_label.text}')
+
+    def create_qr_code(self,text):
+
+
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(text)
+        qr.make(fit=True)
+
+        img = qr.make_image(fill_color="black", back_color="white")
+        img.save(os.path.join(IMAGE_DIRECTORY, 'Token_QR_Code.png'))
+
 
     def start_control_panel(self):
         control_panel.app.run(host="0.0.0.0", port=5001)
