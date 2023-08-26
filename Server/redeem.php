@@ -150,23 +150,23 @@
 <body>
     <div class="items-container">
         <div class="item-container">
-            <img class="item-image" src="AL-30Min.png" alt="30Min AL" onclick="openPopup('30 Minutes AL', '10')">
-            <div class="item-label">30 Minutes AL</div>
+            <img class="item-image" src="F&N 10%.png" alt="F&N 10%.png" onclick="openPopup('F&N 10% Coupon', '100')">
+            <div class="item-label">F&N 10% Coupon</div>
         </div>
 
         <div class="item-container">
-            <img class="item-image" src="AL-1Hour.png" alt="1Hour AL" onclick="openPopup('1 Hour AL', '50')">
-            <div class="item-label">1 Hour AL</div>
+            <img class="item-image" src="F&N 20%.png" alt="F&N 20%.png" onclick="openPopup('F&N 20% Coupon', '200')">
+            <div class="item-label">F&N 20% Coupon</div>
         </div>
 
         <div class="item-container">
-            <img class="item-image" src="AL-2Hour.png" alt="2Hour AL" onclick="openPopup('2 Hour AL', '100')">
-            <div class="item-label">2 Hour AL</div>
+            <img class="item-image" src="Pokka 10%.png" alt="Pokka 10%.png" onclick="openPopup('Pokka 10% Coupon', '100')">
+            <div class="item-label">Pokka 10% Coupon</div>
         </div>
 
         <div class="item-container">
-            <img class="item-image" src="AL-1Day.png" alt="1Day AL" onclick="openPopup('1 Day AL', '500')">
-            <div class="item-label">1 Day AL</div>
+            <img class="item-image" src="Pokka 20%.png" alt="Pokka 20%.png" onclick="openPopup('Pokka 20% Coupon', '200')">
+            <div class="item-label">Pokka 20% Coupon</div>
         </div>
 
 
