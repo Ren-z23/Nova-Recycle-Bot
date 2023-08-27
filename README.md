@@ -54,4 +54,3 @@ Place PNG files (only PNG format) within `/Assets/GUI/ImageClasses`, using the s
 ![GUI](Demo/GUI.PNG)
 [Watch GUI Introduction Video](Demo/GUI-Intro.mp4)
 
-For any queries, contact [your contact information].
