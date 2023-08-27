@@ -15,7 +15,6 @@ import kivy
 import time
 import asyncio
 import websockets
-import control_panel
 from kivy.animation import Animation
 from kivy.graphics.texture import Texture
 from functools import partial

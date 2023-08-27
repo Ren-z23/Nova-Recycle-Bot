@@ -1,5 +1,6 @@
 import socket
-
+import time
+time.sleep(10)
 
 my_ip = '192.168.1.100'
 
