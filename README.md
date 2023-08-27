@@ -51,7 +51,7 @@ List of components used:
 ## GUI Customization
 
 Place PNG files (only PNG format) within `/Assets/GUI/ImageClasses`, using the same category names used for your folders. This ensures the GUI displays the correct categories.
-![Nova-Recycle-Bot](Demo/GUI.png)
+![GUI](Demo/GUI.png)
 [Watch GUI Introduction Video](Demo/GUI-Intro.mp4)
 
 For any queries, contact [your contact information].
