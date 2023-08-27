@@ -26,18 +26,26 @@ List of components used:
 
 (Note: This section covers instructions excluding the robot base setup)
 
-1. Using the Surface Pro, connect to a network and open GUI.py.
-2. SSH into the Jetson Nano and connect it to the same network using the command `nmcli device wifi connect`.
-3. Start up jet.py using the following steps in order:
-    ```bash
-    ssh [username]@[Jetson Nano's IP address]
-    [Jetson Nano's password]
-    sudo nmcli device wifi connect [network] password [network password]
-    cd [path to the code directory]
-    python3 jet.py
-    ```
-4. The servos will be tested. Give it some time to calibrate. The GUI should display the robot's status without issues.
-5. To test, go to the GUI and press 'Yes'. If the displayed text is not the button, click 'Close'. This indicates that the system is working correctly.
+1. **GUI Machine:**
+   - Using the Surface Pro, connect to a network and open GUI.py.
+
+2. **Jetson Nano Machine:**
+   - SSH into the Jetson Nano and connect it to the same network using the command `nmcli device wifi connect`.
+   - Start up jet.py using the following steps in order:
+     ```bash
+     ssh [username]@[Jetson Nano's IP address]
+     [Jetson Nano's password]
+     sudo nmcli device wifi connect [network] password [network password]
+     cd [path to the code directory]
+     python3 jet.py
+     ```
+   - The servos will be tested. Give it some time to calibrate. The GUI should display the robot's status without issues.
+   - To test, go to the GUI and press 'Yes'. If the displayed text is not the button, click 'Close'. This indicates that the system is working correctly.
+
+3. **Website Hosting Machine:**
+   - Host the website on another machine, which can be on a separate network. A popular choice is using XAMPP with PHP.
+   - Drag the `Server` folder into the XAMPP htdocs folder for hosting the website.
+   - Make sure the XAMPP control panel's Apache is turned on for the website to be accessible.
 
 ## Changing Item Types
 
@@ -50,7 +58,8 @@ List of components used:
 
 ## GUI Customization
 
-Place PNG files (only PNG format) within `/Assets/GUI/ImageClasses`, using the same category names used for your folders. This ensures the GUI displays the correct categories.
+Place PNG files (only PNG format) within `/Assets/GUI/ImageClasses`, using the same category names used for your folders.
 ![GUI](Demo/GUI.PNG)
 [Watch GUI Introduction Video](Demo/GUI-Intro.mp4)
 
+For any queries, contact [your contact information].
