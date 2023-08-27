@@ -53,8 +53,20 @@ List of components used:
 2. Open ai.py and use the 'take_pictures' function. Ensure each picture is placed in `/Assets/ImageClassification/[label name]`.
 3. After labeling all items, use the 'train' function to train the model.
 4. While training on your machine, SSH into the Jetson Nano and ensure the ImageClassification folder has the same labeled folders as your laptop.
-5. After training, use the SCP command to copy the new ImageClassification.h5 to your Jetson Nano's code folder.
-6. Your setup is now ready to run the entire code again.
+5. After training, use the `scp` command to copy the new ImageClassification.h5 to your Jetson Nano's code folder.
+
+   ```bash
+   scp /path/to/local/ImageClassification.h5 [username]@[Jetson Nano's IP address]:/path/to/remote/code/folder/
+   ```
+   Replace /path/to/local/ImageClassification.h5 with the actual path to the new ImageClassification.h5 file on your local machine.
+   Replace [username]@[Jetson Nano's IP address] with the SSH credentials for your Jetson Nano.
+   Replace /path/to/remote/code/folder/ with the actual path to the code folder on your Jetson Nano.
+
+   For Example:
+   ```bash
+   scp ~/Downloads/ImageClassification.h5 user@192.168.1.100:/home/user/nova-bot/code/
+   ```
+   Your setup is now ready to run the entire code again.
 
 ## GUI Customization
 
