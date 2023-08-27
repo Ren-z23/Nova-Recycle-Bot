@@ -1,6 +1,6 @@
 # Nova-Recycle-Bot
 
-![Nova-Recycle-Bot](link_to_an_image_here.png)
+![Nova-Recycle-Bot](Demo/Nova-Recycle-Bot.jpg)
 
 **Nova-Recycle-Bot** is a Reverse Vending Machine (RVM) robot on wheels designed for Singapore's 2025 Zero Waste Scheme. It serves the purpose of a recycling vending machine on wheels, sorting items and promoting sustainable recycling practices.
 
@@ -52,6 +52,6 @@ List of components used:
 
 Place PNG files (only PNG format) within `/Assets/GUI/ImageClasses`, using the same category names used for your folders. This ensures the GUI displays the correct categories.
 
-![GUI Preview](link_to_gui_preview.png)
+![GUI Preview](Demo/GUI-Intro.mp4)
 
 For any queries, contact [your contact information].
