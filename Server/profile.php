@@ -121,7 +121,6 @@ if (isset($_POST['logout'])) {
         <img id="profile-image" src="Profile.png" alt="Profile Image">
 
         <?php
-        session_start();
 
         // Check if the user is logged in and has a username in the session
         if (isset($_SESSION['username'])) {

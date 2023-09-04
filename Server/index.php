@@ -1,11 +1,8 @@
 <?php
 session_start();
 
-// Configuration variable: Set to 'manual' for manual login, 'auto' for auto login
-$login_mode = 'manual'; // Change to 'manual' for manual login
-
 // Set the username and password for manual login mode (change these values as needed)
-$valid_username = 'Ren_z23';
+$valid_username = 'guest';
 $valid_password = 'password';
 
 // Check if a token is provided in the URL
@@ -15,7 +12,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 }
 
 // Handle login form submission
-if ($login_mode === 'manual' && isset($_POST['username']) && isset($_POST['password'])) {
+if (isset($_POST['username']) && isset($_POST['password'])) {
     // Get the submitted username and password
     $submitted_username = $_POST['username'];
     $submitted_password = $_POST['password'];
@@ -36,6 +33,7 @@ $is_logged_in = isset($_SESSION['username']);
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login</title>
     <style>
@@ -89,6 +87,7 @@ $is_logged_in = isset($_SESSION['username']);
         }
     </style>
 </head>
+
 <body>
     <video id="background-video" autoplay muted loop>
         <source src="stock_video.mp4" type="video/mp4">
@@ -106,27 +105,22 @@ $is_logged_in = isset($_SESSION['username']);
                 <p class="error-msg">Invalid credentials. Please try again.</p>
             <?php endif; ?>
             <form method="post" action="index.php">
-                <?php if ($login_mode === 'manual'): ?>
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
 
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                <?php endif; ?>
-
-                <?php if ($login_mode === 'auto'): ?>
-                    <!-- No input fields for auto-login mode -->
-                <?php endif; ?>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
 
                 <input type="submit" value="Login">
             </form>
         </div>
     <?php else: ?>
-        <!-- Redirect to main_page.php if the user is logged in -->
         <?php
+        // Redirect to main_page.php if the user is logged in
         header('Location: main_page.php');
         exit;
         ?>
     <?php endif; ?>
 </body>
+
 </html>
